@@ -45,3 +45,23 @@ You will need a RISC-V "newlib" tool chain from
 https://github.com/riscv/riscv-gnu-toolchain, and qemu compiled for
 riscv64-softmmu. Once they are installed, and in your shell
 search path, you can run "make qemu".
+
+# 底下写记录
+
+---
+
+#### 8.15
+
+总算是把lab1写完了
+
+这么久没学别的公开课，发现英语又有点小吃力了，文档有时理解不全意思，导致lab做不太顺
+
+lab1还是一些比较基础的实验，主要是熟悉用的
+
+几个bug:
+
+- file descriptor同时开启的数量有上限，使用完记得关
+
+- find的make grade不会检查你是否写了查询具体文件的代码，但是后面的xargs要用，没写的话就有bug
+
+- 大部分实验都可以偷懒，不过感觉还是不太好，我就尽量照着他说的来
