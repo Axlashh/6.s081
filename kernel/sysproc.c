@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "sysinfo.h"
 
 uint64
 sys_exit(void)
@@ -94,4 +95,30 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+uint64
+sys_trace(void)
+{
+  int n;
+  if(argint(0, &n) < 0)
+    return -1;
+  myproc()->traceMask = n;
+  return 0;
+}
+
+uint64
+sys_sysinfo(void)
+{
+  uint64 info;
+  if (argaddr(0, &info) < 0) {
+    return -1;
+  }
+  struct proc *p = myproc();
+  struct sysinfo si;
+  si.freemem = get_freemem();
+  si.nproc = get_nproc();
+  if(copyout(p->pagetable, info, (char *)&si, sizeof(si)) < 0)
+      return -1;
+  return 0;
 }
